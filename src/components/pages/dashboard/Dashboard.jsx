@@ -15,13 +15,11 @@ function Dashboard() {
   const dispatch = useDispatch()
   const {query} = useParams()
   useEffect(() => {
-    // if(!isLoggedIn){
-    //   navigate("/app/dashboard")
-    //   return
-    // }
+
     fetchData("GET", null).then((resp) => {
       if (!resp.isLoggedIn ){
         navigate("/")
+        navigate(0)
         return
       }
       const datasorter = new DataSorter(resp.notes)
@@ -31,6 +29,11 @@ function Dashboard() {
           setUserNotes(datasorter.sortByYear(date.getFullYear()))
         } else if (query === "old"){
           setUserNotes(datasorter.sortByIdDecreasing(20))
+        } else{
+            setUserNotes(datasorter.findId(query))
+        }
+        if(resp.notes.length !== 0){
+          dispatch(setState(resp))
         }
       }else{
         if(resp.notes.length !== 0){

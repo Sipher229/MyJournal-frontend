@@ -56,7 +56,7 @@ function FormComponent() {
         e.preventDefault()
         if(!needToRegister){
             fetchData("login", credentials).then((resp)=> {
-                if(resp.success){
+                if(resp?.success){
                     dispatch(setState(resp))
                     navigate("/app/dashboard")
                 }else{
@@ -76,7 +76,7 @@ function FormComponent() {
                 return
             }
             fetchData("register", credentials).then((resp) => {
-                if(resp.success){
+                if(resp?.success){
                     dispatch(setState(resp))
                     navigate("/app/dashboard")
                 }else{

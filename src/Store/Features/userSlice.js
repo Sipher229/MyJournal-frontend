@@ -43,9 +43,9 @@ const userSlice = createSlice({
         },
         setState: (state, action) => {
             if(action.payload === null) return
-            const {notes, isLoggedIn, username, password, userId} = action.payload
+            const {notes, isLoggedIn, username, userId} = action.payload
             state.isLoggedIn =isLoggedIn
-            state.user = {notes: notes, username: username, password: password, userId: userId}
+            state.user = {notes: notes, username: username, userId: userId}
         }
     }
 })

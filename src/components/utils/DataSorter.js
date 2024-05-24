@@ -41,6 +41,9 @@ class DataSorter {
         }
         return out
     }
+    findId = (id) => {
+        return this.data.filter((note) => note.id == id)
+    }
 
 }
 
