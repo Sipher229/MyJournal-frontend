@@ -34,13 +34,18 @@ function ContentBox({title="note title", contetText="Your notes or thoughts.", i
   return (
     <>
         <div className="w-[35rem] rounded-lg h-80 bg-white flex flex-col p-5 shadow-md my-5 overflow-y-auto box-border">
-            <div className="w-full h-2 flex justify-end">
-              <Link to={`/app/addcontent/${id}`}>
-                <PencilIcon /> 
-              </Link>
-              <button onClick={handleDelete}>
-                <DeleteIcon /> 
-              </button>
+            <div className="w-full h-4 flex justify-end">
+              <div className="h-full flex justify-center items-center">
+                <Link to={`/app/addcontent/${id}`}>
+                  <button className="h-full cursor-pointer flex justify-center items-center">
+
+                    <PencilIcon /> 
+                  </button>
+                </Link>
+                <button className="cursor-pointer flex justify-center items-center" onClick={handleDelete}>
+                  <DeleteIcon /> 
+                </button>
+              </div>
             </div>
             <div className="w-full flex flex-col justify-center">
             <h2 className="text-xl font-sans font-semibold my-3">{title}</h2>

@@ -9,7 +9,7 @@ function TopNav() {
   const [logOutHidn, setLogOutHidn] = useState(true)
   const navigate = useNavigate()
   const {user} = useSelector((store) => store.user)
-  const pLetter = user.username.charAt(0).toUpperCase()
+  const pLetter = user.username?.charAt(0).toUpperCase()
 
   const handleClickLgOUt = () => {
     setLogOutHidn((prev)=>!prev)
@@ -34,7 +34,7 @@ function TopNav() {
                       <button
                        className="bg-black w-12 h-12 rounded-full text-white text-2xl "
                        onClick={handleClickLgOUt}
-                       >{pLetter}</button>
+                       >{pLetter? pLetter : 'U'}</button>
                       <div className={`w-full min-h-7 absolute translate-y-14 bg-white rounded-md shadow-md ${logOutHidn? "hidden" : ""}`}>
                         <ul className=" w-full">
                           <li className="hover:bg-fadedWhite hover:cursor-pointer bg-white font-semibold pl-1" onClick={() =>{navigate("/"); navigate(0)} }>Log out</li>

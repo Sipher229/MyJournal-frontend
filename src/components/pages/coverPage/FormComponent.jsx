@@ -78,9 +78,10 @@ function FormComponent() {
             fetchData("register", credentials).then((resp) => {
                 if(resp?.success){
                     dispatch(setState(resp))
+                    console.log(resp)
                     navigate("/app/dashboard")
                 }else{
-                    alert("something wrong with our server")
+                    alert("Username already in use. Please use a different one")
                     setSubmitted(false)
                 }
             })

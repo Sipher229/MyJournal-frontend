@@ -36,12 +36,10 @@ function Dashboard() {
           dispatch(setState(resp))
         }
       }else{
-        if(resp.notes.length !== 0){
-          dispatch(setState(resp))
-        }
-        setUserNotes(resp.notes)
+        console.log(resp)
+        dispatch(setState(resp))
       }
-    })
+    }).catch(()=> alert('Something went wrong'))
 
   }, [])
  
@@ -50,16 +48,12 @@ function Dashboard() {
       <div className="w-full h-full overflow-y-auto flex flex-col justify-start items-start py-8 px-28">
       
       {
-        userNotes.length === 0 ?
-        user.notes.map((note,index) => {
-          return(
-            <div key={index} className="h-72 my-6">
-              <ContentBox title={note.title} contetText={note.content} id={note.id} date={note.date} />
-            </div>
-          )
-        })
+        user.notes.length === 0 ?
+        <div className="h-72 my-6">
+          <ContentBox />
+        </div>
         :
-        userNotes.map((note, index)=>{
+        user.notes.map((note, index)=>{
           return (
             <div key={index} className="h-72 my-6">
               <ContentBox title={note.title} contetText={note.content} id={note.id} date={note.date} />
