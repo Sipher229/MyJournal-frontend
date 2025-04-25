@@ -1,12 +1,13 @@
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import SearchIcon from "./SearchIcon"
 import SearchSuggestions from "./SearchSuggestions"
 import { useSelector } from "react-redux"
+import { RootState } from "Store/store"
 
 function SearchBox() {
   const [query, setQuery] = useState("")
-  const {user} = useSelector((store) => store.user)
-  const handleChange = (e) => {
+  const {user} = useSelector((store: RootState) => store.user)
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setQuery(e.target.value)
   }

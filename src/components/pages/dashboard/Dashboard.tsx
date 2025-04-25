@@ -51,7 +51,7 @@ function Dashboard() {
         user.notes.length === 0 ?
         <div className="h-72 my-6">
           <ContentBox />
-        </div>
+        </div>  
         :
         user.notes.map((note, index)=>{
           return (

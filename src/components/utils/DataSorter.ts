@@ -1,27 +1,22 @@
+import { Note } from "./fetchData";
 class DataSorter {
-   
-    constructor(params) {
+   data: Note[];
+    constructor(params: Note[]) {
         this.data = params   
     }
 
-    sortByYear = (year = 0) => {
 
-        return this.data.filter((elem) => {
-            return elem.date.includes(year.toString())
+    sortByIdIncreasing = (id: number) => {
+        
+        return this.data.filter((elem: Note)=> {
+            return elem.id as number > id 
         })
     }
 
-    sortByIdIncreasing = (id) => {
+    sortByIdDecreasing= (id: number) => {
         
-        return this.data.filter((elem)=> {
-            return elem.id > id
-        })
-    }
-
-    sortByIdDecreasing= (id) => {
-        
-        return this.data.filter((elem)=> {
-            return elem.id < id
+        return this.data.filter((elem: Note)=> {
+            return elem.id as number < id
         })
     }
 
@@ -30,7 +25,7 @@ class DataSorter {
         for (let i = 0; i < out.length; i++) {
             let current = i
             for (let j = 0; j < out.length; j++) {
-                if (out[j].id > current.id){
+                if (out[j].id as number > current){
                     current = j
                 }    
             }
@@ -41,7 +36,7 @@ class DataSorter {
         }
         return out
     }
-    findId = (id) => {
+    findId = (id: string | number) => {
         return this.data.filter((note) => note.id == id)
     }
 

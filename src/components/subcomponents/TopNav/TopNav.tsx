@@ -4,11 +4,12 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { RootState } from "Store/store"
 
 function TopNav() {
   const [logOutHidn, setLogOutHidn] = useState(true)
   const navigate = useNavigate()
-  const {user} = useSelector((store) => store.user)
+  const {user} = useSelector((store: RootState) => store.user)
   const pLetter = user.username?.charAt(0).toUpperCase()
 
   const handleClickLgOUt = () => {

@@ -1,7 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Note } from "components/utils/fetchData";
 
 const time = new Date()
 const date = `${time.getMonth()+1}/${time.getDate()}/${time.getFullYear()}`
+
+type UserState = {
+    userId: number,
+    username: string,
+    password?: string,
+    notes: Note[],
+
+}
+type InitialState = {
+    isLoggedIn: boolean,
+    user: UserState
+}
 
 const  initialState = {
     isLoggedIn: false,
@@ -25,11 +38,11 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        deleteNote: (state, action) => {
+        deleteNote: (state: InitialState, action) => {
             const id = action.payload
             state.user.notes = state.user.notes.filter((note)=> note.id !== id)
         },
-        addNote: (state, action) => {
+        addNote: (state: InitialState, action) => {
             const {title, content} = action.payload
             state.user.notes = [...state.user.notes, {title, content, id: Date.now()}]
         },
@@ -41,7 +54,7 @@ const userSlice = createSlice({
                 }
             })
         },
-        setState: (state, action) => {
+        setState: (state: InitialState, action) => {
             if(action.payload === null) return
             const {notes, isLoggedIn, username, userId} = action.payload
             state.isLoggedIn =isLoggedIn
@@ -49,5 +62,5 @@ const userSlice = createSlice({
         }
     }
 })
-export const {deleteNote, addNote, editNote, setState} = userSlice.actions
-export default userSlice.reducer
+export const {deleteNote, addNote, editNote, setState} = userSlice.actions;
+export default userSlice.reducer;

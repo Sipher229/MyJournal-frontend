@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import App from './App.js'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
-import CoverPage from './components/pages/coverPage/CoverPage.jsx'
-import AddContent from './components/pages/addContent/AddContent.jsx'
-import Dashboard from './components/pages/dashboard/Dashboard.jsx'
-import { store } from './Store/store.js'
+import CoverPage from './components/pages/coverPage/CoverPage.js'
+import AddContent from './components/pages/addContent/AddContent.js'
+import Dashboard from './components/pages/dashboard/Dashboard.js'
+import store from "./Store/store"
 import { Provider} from 'react-redux'
-import ErrorPage from './components/pages/ErrorPage.jsx'
+import ErrorPage from './components/pages/ErrorPage.js'
 
 
 
@@ -49,7 +49,7 @@ const router = createBrowserRouter(
 ],
 )
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />

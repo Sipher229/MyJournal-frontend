@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState, MouseEvent } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import {setState } from "../../../Store/Features/userSlice"
-import fetchData from "../../utils/fetchData"
+import fetchData, { Note } from "../../utils/fetchData"
+import { RootState } from "Store/store"
 
 
 function AddContent() {
   const navigate = useNavigate()
-  const {user} = useSelector((state)=> state.user)
+  const {user} = useSelector((state: RootState)=> state.user)
   const dispatch = useDispatch()
   const [note, setNote] = useState({
     title: "",
@@ -20,13 +21,13 @@ function AddContent() {
 
   // const [submitted, setSubmitted] = useState(false)
 
-  const getNote = (id) => {
+  const getNote = (id: number | string) => {
     const note = user.notes.find((note)=> note.id == id)
     return note
   }
 
-  const handleChange = (e) => {
-    const {name, value} = e.target
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const {name, value} = e.currentTarget
 
     if (name == "title") {
       setNote((prev)=>{
@@ -40,7 +41,7 @@ function AddContent() {
     }
   }
 
-  const handleAdd = (e) => {
+  const handleAdd = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault()
 
     const data = {title: note.title, content: note.content , userId: user.userId}
@@ -59,7 +60,7 @@ function AddContent() {
     
   }
 
-  const handleEdit = (e) => {
+  const handleEdit = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault()
 
     const data = {...note, id: id}
@@ -77,9 +78,15 @@ function AddContent() {
 
   useEffect(()=> {
     if(id){
-      const editableNote = getNote(id)
-      setNote(editableNote)
-      setEditMode(true)
+      try{
+
+        const editableNote = getNote(id) as Note
+        setNote(editableNote)
+        setEditMode(true)
+      }
+      catch (error: any){
+        console.log(error.message);
+      }
     }
   }, [])
 
@@ -100,7 +107,7 @@ function AddContent() {
 
           />
           <label htmlFor="content" className="text-gray-500 font-semibold ">Notes:</label>
-          <textarea className="outline outline-1 outline-gray-400 focus:shadow focus:shadow-myIndigo rounded-md p-2" rows="14"
+          <textarea className="outline outline-1 outline-gray-400 focus:shadow focus:shadow-myIndigo rounded-md p-2" rows={14}
             id="content"
             name="content"
             value={note.content}

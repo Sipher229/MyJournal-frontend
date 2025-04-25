@@ -9,16 +9,23 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { deleteNote } from "../../Store/Features/userSlice"
 
-function ContentBox({title="note title", contetText="Your notes or thoughts.", id, date = "MM/DD/YYYY"}) {
+type Proptypes = {
+  title?: string,
+  contetText?: string,
+  id?: number | string,
+  date?: string
+}
+
+function ContentBox({title="note title", contetText="Your notes or thoughts.", id="", date = "MM/DD/YYYY"}: Proptypes) {
   // const [delRequest, setDelRequest] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleDelete = () => {
     if(!id){
-      dispatch(deleteNote(1))
+      return
     }
-    fetchData("delete", {id: id}).then((resp) => {
+    fetchData<null>("delete", null, id as number).then((resp) => {
       if (resp.success){
         navigate("/app/dashboard")
         navigate(0)

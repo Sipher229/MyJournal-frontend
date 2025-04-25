@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react"
+import { useEffect, useState, MouseEvent, ChangeEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import fetchData from "../../utils/fetchData"
 import {useDispatch} from "react-redux"
@@ -21,11 +21,11 @@ function FormComponent() {
     
     const dispatch = useDispatch()
     
-    const handleNeedToRegister = (e)=>{
+    const handleNeedToRegister = (e: MouseEvent<HTMLElement>)=>{
         e.preventDefault()
         setNeedToRegister((prev)=> !prev)
     }
-    const handleChange = (e) =>{
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) =>{
         const {name, value} = e.target
         switch (name) {
             case "username":
@@ -51,7 +51,7 @@ function FormComponent() {
     //     e.preventDefault()
     
     // }
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: MouseEvent<HTMLElement>) => {
         setSubmitted((prev) => !prev )
         e.preventDefault()
         if(!needToRegister){
@@ -61,11 +61,7 @@ function FormComponent() {
                     navigate("/app/dashboard")
                 }else{
                     alert("Wrong password or email")
-                    setCredentials({
-                        username: "",
-                        password: "",
-                        confirmPassword: ""
-                    })
+                    console.log(resp);
                     setSubmitted(false)
                 }
 
